@@ -19,11 +19,11 @@ final audioHandlerProvider =
 // ---------------------------------------------------------------------------
 
 final playerStateProvider =
-    AsyncNotifierProvider<PlayerStateNotifier, PlayerState>(
+    AsyncNotifierProvider<PlayerStateNotifier, LtPlayerState>(
   PlayerStateNotifier.new,
 );
 
-class PlayerStateNotifier extends AsyncNotifier<PlayerState> {
+class PlayerStateNotifier extends AsyncNotifier<LtPlayerState> {
   StreamSubscription<PlaybackEvent>? _eventSub;
   StreamSubscription<Duration>? _positionSub;
   Timer? _progressSaveTimer;
@@ -34,7 +34,7 @@ class PlayerStateNotifier extends AsyncNotifier<PlayerState> {
   static const _saveInterval = Duration(seconds: 3);
 
   @override
-  Future<PlayerState> build() async {
+  Future<LtPlayerState> build() async {
     final handler = ref.watch(audioHandlerProvider);
     final player = handler.player;
 
@@ -64,11 +64,11 @@ class PlayerStateNotifier extends AsyncNotifier<PlayerState> {
       _progressSaveTimer?.cancel();
     });
 
-    return PlayerState.initial;
+    return LtPlayerState.initial;
   }
 
   void _updateFromPlayer(AudioPlayer player) {
-    final current = state.valueOrNull ?? PlayerState.initial;
+    final current = state.valueOrNull ?? LtPlayerState.initial;
     final newState = current.copyWith(
       isPlaying: player.playing,
       isLoading: player.processingState == ProcessingState.loading ||
@@ -90,7 +90,7 @@ class PlayerStateNotifier extends AsyncNotifier<PlayerState> {
     }
   }
 
-  void _saveCurrentProgress(PlayerState ps) {
+  void _saveCurrentProgress(LtPlayerState ps) {
     if (ps.currentLessonIndex == null || ps.currentCourse == null) return;
     ref
         .read(lessonProgressProvider(
@@ -99,7 +99,7 @@ class PlayerStateNotifier extends AsyncNotifier<PlayerState> {
         .saveProgress(ps.position.inSeconds.toDouble());
   }
 
-  void _markLessonFinished(PlayerState ps) {
+  void _markLessonFinished(LtPlayerState ps) {
     if (ps.currentLessonIndex == null || ps.currentCourse == null) return;
     ref
         .read(lessonProgressProvider(
@@ -121,7 +121,7 @@ class PlayerStateNotifier extends AsyncNotifier<PlayerState> {
   }) async {
     final handler = ref.read(audioHandlerProvider);
     state = AsyncValue.data(
-      (state.valueOrNull ?? PlayerState.initial).copyWith(
+      (state.valueOrNull ?? LtPlayerState.initial).copyWith(
         isLoading: true,
         currentCourse: course,
         currentLessonIndex: lessonIndex,

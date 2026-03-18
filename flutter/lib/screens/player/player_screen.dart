@@ -117,7 +117,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen> {
           }
 
           final lesson = metadata.lessons[widget.lessonIndex];
-          final ps = playerState.valueOrNull ?? PlayerState.initial;
+          final ps = playerState.valueOrNull ?? LtPlayerState.initial;
 
           return LayoutBuilder(
             builder: (context, constraints) {
@@ -161,7 +161,7 @@ class _PlayerControls extends ConsumerWidget {
     required this.courseName,
   });
 
-  final PlayerState ps;
+  final LtPlayerState ps;
   final CourseInfo courseInfo;
   final int lessonIndex;
   final int totalLessons;
@@ -308,7 +308,7 @@ class _NarrowPlayerLayout extends StatelessWidget {
   final String lesson;
   final int lessonIndex;
   final int totalLessons;
-  final PlayerState ps;
+  final LtPlayerState ps;
   final String courseName;
 
   @override
@@ -409,7 +409,7 @@ class _WidePlayerLayout extends StatelessWidget {
   final String lesson;
   final int lessonIndex;
   final int totalLessons;
-  final PlayerState ps;
+  final LtPlayerState ps;
   final String courseName;
 
   @override

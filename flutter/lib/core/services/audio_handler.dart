@@ -2,9 +2,12 @@ import 'package:just_audio/just_audio.dart';
 import 'package:audio_service/audio_service.dart';
 import '../models/course.dart';
 
-/// The playing state exposed to the UI
-class PlayerState {
-  const PlayerState({
+/// The playing state exposed to the UI.
+///
+/// Named [LtPlayerState] to avoid collision with [just_audio]'s own
+/// [PlayerState] class.
+class LtPlayerState {
+  const LtPlayerState({
     required this.isPlaying,
     required this.isLoading,
     required this.position,
@@ -22,14 +25,14 @@ class PlayerState {
   final CourseName? currentCourse;
   final String? errorMessage;
 
-  static const PlayerState initial = PlayerState(
+  static const LtPlayerState initial = LtPlayerState(
     isPlaying: false,
     isLoading: false,
     position: Duration.zero,
     duration: Duration.zero,
   );
 
-  PlayerState copyWith({
+  LtPlayerState copyWith({
     bool? isPlaying,
     bool? isLoading,
     Duration? position,
@@ -38,7 +41,7 @@ class PlayerState {
     CourseName? currentCourse,
     String? errorMessage,
   }) {
-    return PlayerState(
+    return LtPlayerState(
       isPlaying: isPlaying ?? this.isPlaying,
       isLoading: isLoading ?? this.isLoading,
       position: position ?? this.position,
