@@ -1,0 +1,66 @@
+name: language_transfer
+description: Language Transfer - free language learning audio courses
+version: 2.0.0+12
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State management
+  flutter_riverpod: ^2.6.1
+  riverpod_annotation: ^2.6.1
+
+  # Navigation
+  go_router: ^14.2.0
+
+  # Audio playback (supports Android, iOS, Web)
+  just_audio: ^0.9.40
+  audio_service: ^0.18.14
+
+  # Storage (shared_preferences uses localStorage on web, native prefs on mobile)
+  shared_preferences: ^2.3.2
+
+  # HTTP / networking
+  dio: ^5.7.0
+
+  # File system (mobile only; web uses browser storage)
+  path_provider: ^2.1.4
+
+  # JSON
+  collection: ^1.18.0
+
+  # UUID
+  uuid: ^4.5.0
+
+  # Image caching
+  cached_network_image: ^3.4.1
+
+  # Formatting utilities
+  intl: ^0.19.0
+
+  # URL launcher (for external links)
+  url_launcher: ^6.3.0
+
+  # Connectivity
+  connectivity_plus: ^6.1.0
+
+  # Icons
+  flutter_svg: ^2.0.10+1
+  font_awesome_flutter: ^10.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  riverpod_generator: ^2.6.1
+  build_runner: ^2.4.12
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/course_images/
